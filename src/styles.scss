@@ -1,0 +1,15 @@
+$primary-color: rgb(111, 50, 255);
+$selection-color: rgba(111, 50, 255, 0.5);
+$dark-color: #141124;
+$light-color: #fff;
+
+html {
+    background-color: $dark-color;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: $primary-color;
+}

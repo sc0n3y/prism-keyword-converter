@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "CSV to PrismAIO Keyword Converter React App",
   "homepage": "https://sc0n3y.github.io/react-gh-pages",
+  "repository": {
+    "url": "git+https://github.com/sc0n3y/prism-keyword-converter.git"
+  },
   "main": "index.js",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

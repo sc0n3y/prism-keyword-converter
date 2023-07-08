@@ -15,7 +15,7 @@ const ConverterContainer = styled(Container)({
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   maxWidth: '600px',
   backgroundColor: '#fff',
-  backgroundImage: 'https://780921246-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Mjpf0oK2XC20C94VPcj%2F-MkO94f_e5GkpwEUXZga%2F-MkO9SYf4pAIbBozt6B4%2F1500x500.jpg%20copy.jpg?alt=media&token=42847701-5cd9-4f95-8e59-bae7e9b29539'
+  backgroundImage: 'url("banner.jpg")',
 });
 
 const Converter: React.FC = () => {
@@ -32,17 +32,17 @@ const Converter: React.FC = () => {
             return value;
           } else {
             // Append "+" prefix for other values
-            return `+${value}`;
+            return value.trim() ? `+${value.trim()}` : '';
           }
         });
-        return `(${convertedValues.join(', ')})`;
+        return `(${convertedValues.filter(Boolean).join(', ')})`;
       });
       setConvertedKeywords(converted.join('\n'));
     } catch (error) {
       console.error('Error converting keywords:', error);
     }
   };
-
+  
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setCsvInput(e.target.value);
   };
@@ -57,7 +57,7 @@ const Converter: React.FC = () => {
         cols={50}
         value={csvInput}
         onChange={handleInputChange}
-        placeholder="Enter CSV Keywords"
+        placeholder="nike,dunk,low,sb,-be,-true"
       />
       <Button variant="contained" onClick={convertKeywords}>
         Convert
@@ -66,7 +66,12 @@ const Converter: React.FC = () => {
         <Typography variant="h4" component="h2">
           Converted Keywords:
         </Typography>
-        <pre>{convertedKeywords}</pre>
+        <TextareaAutosize
+          minRows={10}
+          cols={50}
+          value={convertedKeywords}
+          readOnly
+        />
       </div>
     </ConverterContainer>
   );

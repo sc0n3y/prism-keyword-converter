@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -22,7 +23,6 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
   },
   devServer: {
     static: {
@@ -38,6 +38,18 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './public/favicon.ico',
+          to: 'favicon.ico',
+        },
+        {
+          from: './public/banner.jpg',
+          to: 'banner.jpg',
+        },
+      ],
     }),
   ],
 };

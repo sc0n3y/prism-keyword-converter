@@ -24,7 +24,7 @@ const Converter: React.FC = () => {
 
   const convertKeywords = async () => {
     try {
-      const keywords = await csvtojson().fromString(csvInput);
+      const keywords = await csvtojson({noheader:true}).fromString(csvInput);
       const converted = keywords.map((keyword: { [key: string]: string }) => {
         const convertedValues = Object.values(keyword).map((value: string) => {
           if (value.startsWith('-')) {

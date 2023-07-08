@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent } from "react";
 import csvtojson from "csvtojson";
 import { Button, Container, TextareaAutosize, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const ConverterContainer = styled(Container)({
   display: "flex",
@@ -17,7 +19,14 @@ const ConverterContainer = styled(Container)({
   backgroundColor: "#fff",
   backgroundImage: 'url("banner.jpg")',
 });
-
+const Footer = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '2rem',
+  gap: '1rem',
+  fontSize: '0.8rem',
+  color: '#fff',
+});
 const Converter: React.FC = () => {
   const [csvInput, setCsvInput] = useState("");
   const [convertedKeywords, setConvertedKeywords] = useState("");
@@ -28,28 +37,31 @@ const Converter: React.FC = () => {
       const converted = keywords.map((keyword: { [key: string]: string }) => {
         const convertedValues = Object.keys(keyword).map((key: string) => {
           const value = keyword[key];
-          if (value.startsWith('-')) {
+          if (value.startsWith("-")) {
             // Preserve "-" prefix in the output
             return value;
-          } else if (value.startsWith('+')) {
+          } else if (value.startsWith("+")) {
             // If input already has "+", remove additional "+"
-            return value.replace(/^\+/, '').trim();
+            return value.replace(/^\+/, "").trim();
           } else {
             // Append "+" prefix for other values
-            return value.trim() ? `+${value.trim()}` : '';
+            return value.trim() ? `+${value.trim()}` : "";
           }
         });
-        return `(${convertedValues.filter(Boolean).join(', ')})`;
+        return `(${convertedValues.filter(Boolean).join(", ")})`;
       });
-      setConvertedKeywords(converted.join('\n'));
+      setConvertedKeywords(converted.join("\n"));
     } catch (error) {
-      console.error('Error converting keywords:', error);
+      console.error("Error converting keywords:", error);
     }
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setCsvInput(e.target.value);
   };
+
+  const currentYear = new Date().getFullYear();
+  const author = "sc0n3y";
 
   return (
     <ConverterContainer>
@@ -77,6 +89,28 @@ const Converter: React.FC = () => {
           readOnly
         />
       </div>
+      <Footer>
+        <Typography variant="body2" component="span" style={{ color: '#fff' }}>
+          &copy; {currentYear} by{' '}
+          <a
+            href="https://github.com/sc0n3y"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#fff' }}
+          >
+            {author}
+          </a>{' '}
+          with ❤️ for{' '}
+          <a
+            href="https://prismaio.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#fff' }}
+          >
+            PrismAIO
+          </a>
+        </Typography>
+      </Footer>
     </ConverterContainer>
   );
 };

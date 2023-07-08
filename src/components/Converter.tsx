@@ -28,19 +28,22 @@ const Converter: React.FC = () => {
       const converted = keywords.map((keyword: { [key: string]: string }) => {
         const convertedValues = Object.keys(keyword).map((key: string) => {
           const value = keyword[key];
-          if (value.startsWith("-")) {
+          if (value.startsWith('-')) {
             // Preserve "-" prefix in the output
             return value;
+          } else if (value.startsWith('+')) {
+            // If input already has "+", remove additional "+"
+            return value.trim();
           } else {
             // Append "+" prefix for other values
-            return value.trim() ? `+${value.trim()}` : "";
+            return value.trim() ? `+${value.trim()}` : '';
           }
         });
-        return `(${convertedValues.filter(Boolean).join(", ")})`;
+        return `(${convertedValues.filter(Boolean).join(', ')})`;
       });
-      setConvertedKeywords(converted.join("\n"));
+      setConvertedKeywords(converted.join('\n'));
     } catch (error) {
-      console.error("Error converting keywords:", error);
+      console.error('Error converting keywords:', error);
     }
   };
 

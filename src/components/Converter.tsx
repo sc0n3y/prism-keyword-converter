@@ -24,16 +24,21 @@ const Converter: React.FC = () => {
   const convertKeywords = async () => {
     try {
       const keywords = await csvtojson().fromString(csvInput);
-      const converted = keywords.map((keyword: { [key: string]: string }) =>
-        "(" +
-        Object.values(keyword)
-          .map((value: string) => `+${value}`)
-          .join(", ") +
-        ")"
-      );
-      setConvertedKeywords(converted.join("\n"));
+      const converted = keywords.map((keyword: { [key: string]: string }) => {
+        const convertedValues = Object.values(keyword).map((value: string) => {
+          if (value.startsWith('-')) {
+            // Preserve "-" prefix in the output
+            return value;
+          } else {
+            // Append "+" prefix for other values
+            return `+${value}`;
+          }
+        });
+        return `(${convertedValues.join(', ')})`;
+      });
+      setConvertedKeywords(converted.join('\n'));
     } catch (error) {
-      console.error("Error converting keywords:", error);
+      console.error('Error converting keywords:', error);
     }
   };
 

@@ -33,7 +33,7 @@ const Converter: React.FC = () => {
             return value;
           } else if (value.startsWith('+')) {
             // If input already has "+", remove additional "+"
-            return value.trim();
+            return value.replace(/^\+/, '').trim();
           } else {
             // Append "+" prefix for other values
             return value.trim() ? `+${value.trim()}` : '';

@@ -14,7 +14,8 @@ const ConverterContainer = styled(Container)({
   borderRadius: '4px',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   maxWidth: '600px',
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  backgroundImage: 'https://780921246-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Mjpf0oK2XC20C94VPcj%2F-MkO94f_e5GkpwEUXZga%2F-MkO9SYf4pAIbBozt6B4%2F1500x500.jpg%20copy.jpg?alt=media&token=42847701-5cd9-4f95-8e59-bae7e9b29539'
 });
 
 const Converter: React.FC = () => {
@@ -49,7 +50,7 @@ const Converter: React.FC = () => {
   return (
     <ConverterContainer>
       <Typography variant="h3" component="h1" align="center">
-        PrismAIO CSV Keyword Converter
+        PrismAIO Shopify CSV Keyword Converter
       </Typography>
       <TextareaAutosize
         minRows={10}
